@@ -69,7 +69,7 @@ val localRepo = file("${layout.buildDirectory.get()}/local-repo")
 publishing { repositories { maven(localRepo) } }
 
 dependencies {
-    implementation(gradleApi())
+    compileOnly(gradleApi())
     implementation(libs.kotlinx.serialization.json)
     compileOnly(libs.android.gradle.plugin)
 
