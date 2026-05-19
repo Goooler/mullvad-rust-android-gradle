@@ -13,7 +13,14 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecOperations
+import org.gradle.work.DisableCachingByDefault
 
+// Gradle task output caching is disabled for this task.
+// `cargo build` reads additional Rust-side inputs that are not fully declared here
+// (for example sources, Cargo.toml, Cargo.lock, build.rs etc.), so identical declared task inputs
+// could still produce different outputs.
+
+@DisableCachingByDefault(because = "Cargo inputs are not fully modeled as task inputs")
 abstract class CargoBuildTask : DefaultTask() {
     @Input val toolchain = property<Toolchain>()
 
