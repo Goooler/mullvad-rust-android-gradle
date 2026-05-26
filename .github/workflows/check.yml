@@ -26,6 +26,17 @@ jobs:
         run: |
           ./gradlew ktfmtCheck
 
+  validate_plugin:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE for the job.
+      - uses: actions/checkout@v6
+
+      - name: Check formatting
+        run: |
+          ./gradlew :plugin:validatePlugins
+
   generate_versions:
     runs-on: ubuntu-latest
 
